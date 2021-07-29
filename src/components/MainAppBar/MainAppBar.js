@@ -1,8 +1,16 @@
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { AppBar, Toolbar, Button, IconButton, Typography, Backdrop, Divider, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem, Modal, Slide, useTheme } from '@material-ui/core'
-import { AccountCircle, Menu as MenuIcon, MoreVert, Star, Close } from '@material-ui/icons'
+import {
+  AppBar, Toolbar, Button, IconButton,
+  Typography, Divider, List, ListItem,
+  ListItemIcon, ListItemText, Menu, MenuItem, useTheme, Drawer
+} from '@material-ui/core'
+import {
+  AccountCircle, Menu as MenuIcon,
+  MoreVert, Star, Close, Inbox as InboxIcon,
+  Mail as MailIcon
+} from '@material-ui/icons'
 
 import { goToHome, goToLogin, goToSignUp } from '../../routes/coordinator'
 import LoggedContext from '../../context/LoggedContext'
@@ -36,10 +44,6 @@ const MainAppBar = () => {
     setProfileAnchor(event.currentTarget);
   };
 
-  const handleSidebarOpen = () => {
-    setSidebarOpen(prev => !prev);
-  };
-
   const handleSignUp = () => {
     handleMobileMenuClose();
 
@@ -68,20 +72,92 @@ const MainAppBar = () => {
     handleMobileMenuClose();
   };
 
+  const handleSidebarOpen = () => {
+    setSidebarOpen(true);
+  };
+
+  const handleSidebarClose = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <div>
       <AppBar position="static" className="mainappbar">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className="menu-button"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleSidebarOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-
+          <div>
+            <IconButton
+              color="inherit"
+              aria-label="open Sidebar"
+              onClick={handleSidebarOpen}
+              edge="start"
+              className="menu-button"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              variant="persistent"
+              anchor="left"
+              open={sidebarOpen}
+            >
+              <div>
+                <ListItem
+                  className="sidebar__title"
+                  aria-label="contacts"
+                  id="modal-description">
+                  <ListItemIcon>
+                    <IconButton
+                      aria-label="show more"
+                      aria-controls={mobileMenuId}
+                      aria-haspopup="false"
+                      onClick={handleSidebarClose}
+                    >
+                      <Close color="error" />
+                    </IconButton>
+                  </ListItemIcon>
+                  <ListItemText
+                    className="sidebar__title"
+                    id="transition-modal-description"
+                    primary="Lists" />
+                </ListItem>
+              </div>
+              <Divider />
+              <List className="sidebar__list" component="nav" >
+                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                  <ListItem button key={text}>
+                    {index % 2 === 0 ?
+                      (
+                        <>
+                          <ListItemIcon>
+                            <Star htmlColor={theme.palette.warning.main} />
+                          </ListItemIcon>
+                          <ListItemText
+                            className="sidebar__text"
+                            primary={text}
+                          />
+                        </>
+                      )
+                      :
+                      <ListItemText
+                      className="sidebar__text"
+                        inset primary={text}
+                      />
+                    }
+                  </ListItem>
+                ))}
+              </List>
+              <Divider />
+              <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                  <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                    <ListItemText primary={text}
+                      className="sidebar__text"
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Drawer>
+          </div>
           <div
             className="logo"
             onClick={handleLogoClick}
@@ -92,7 +168,7 @@ const MainAppBar = () => {
               color="inherit"
               noWrap
             >
-              Material-UI
+              Todoapp
             </Typography>
           </div>
 
@@ -100,7 +176,6 @@ const MainAppBar = () => {
 
           <div className="grow" />
           <div className="toolbar__auth--desktop">
-            {loggedContext.setLogged(true)}
             {loggedContext.logged ?
               (
                 <div>
@@ -119,8 +194,8 @@ const MainAppBar = () => {
               )
               : (
                 <div>
-                  <Button color="inherit">Signup</Button>
-                  <Button color="inherit">Login</Button>
+                  <Button color="inherit" className="toolbar__button">Signup</Button>
+                  <Button color="inherit" className="toolbar__button">Login</Button>
                 </div>
               )
             }
@@ -159,13 +234,14 @@ const MainAppBar = () => {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
           >
-            {loggedContext.logged ? (
-              <div>
-                <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </div>
-            )
+            {loggedContext.logged ?
+              (
+                <div>
+                  <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </div>
+              )
               :
               (
                 <div>
@@ -177,56 +253,6 @@ const MainAppBar = () => {
           </Menu>
         </Toolbar>
       </AppBar>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={sidebarOpen}
-        onClose={handleSidebarOpen}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Slide direction="right" in={sidebarOpen}
-          // @ts-ignore
-          className={'sidebar--open'} mountOnEnter unmountOnExit
-        >
-          <div>
-            <ListItem
-             className="sidebar__title"
-             aria-label="contacts"
-             id="modal-description">
-              <ListItemIcon>
-                <IconButton
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="false"
-                  onClick={handleSidebarOpen}
-                >
-                  <Close color="error" />
-                </IconButton>
-              </ListItemIcon>
-              <ListItemText
-               className="sidebar__title"
-               id="transition-modal-description"
-               primary="Lists" />
-            </ListItem>
-            <Divider />
-            <List className="sidebar__list" component="nav">
-              <ListItem button>
-                <ListItemIcon>
-                  <Star htmlColor={theme.palette.warning.main} />
-                </ListItemIcon>
-                <ListItemText primary="Chelsea Otakan" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText inset primary="Eric Hoffman" />
-              </ListItem>
-            </List>
-          </div>
-        </Slide>
-      </Modal>
     </div>
   );
 }

@@ -19,7 +19,7 @@ function Search(props) {
                 searchClient: props.searchClient,
                 queries: [
                   {
-                    indexName: 'instant_search',
+                    indexName: 'dev_fullstack',
                     query,
                   },
                 ],

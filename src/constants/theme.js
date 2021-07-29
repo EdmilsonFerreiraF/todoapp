@@ -13,8 +13,9 @@ let theme = createTheme({
     },
 
     secondary: {
+      light: green["A100"],
       main: secondaryColor,
-      contrastText: green[50]
+      contrastText: green[50],
     }
   },
 })
@@ -31,6 +32,10 @@ theme.overrides = {
         "--aa-search-input-height": '30px',
         "--aa-primary-color-rgb": "255, 255, 255"
       },
+      '.MuiDrawer-paperAnchorDockedLeft': {
+        width: '100%',
+        maxWidth: '240px',
+      },
       '.grow': {
         flexGrow: 1,
       },
@@ -41,65 +46,78 @@ theme.overrides = {
           display: 'block',
         },
       },
-      '.MuiAppBar-root.mainappbar': {
-        color: theme.palette.secondary.contrastText
-      },
-      '.MuiListItem-root': {
-        '&.sidebar__title': {
-          padding: '8px 18px 8px 4px',
+      '.MuiTypography-root': {
+        '&.logo--large': {
+          marginTop: theme.spacing(8),
+          marginBottom: theme.spacing(8),
         },
+      },
+      '.MuiSvgIcon': {
+        '&.-colorError': {
+          cursor: 'pointer',
+        },
+        '&-root': {
+          '&.feat-card__icon': {
+            width: "100%",
+            height: "100%",
+            marginTop: "10px",
+            color: theme.palette.secondary.main,
+          }
+        },
+      },
+      '.MuiAppBar-root': {
+        '&.mainappbar': {
+          color: theme.palette.secondary.contrastText
+        },
+      },
+      '.MuiListItem': {
+        '&-root': {
+          '&.sidebar__title': {
+            paddingLeft: '4px',
+          }
+        }
+      },
+      '.MuiListItemIcon': {
+        minWidth: '45px',
       },
       '.MuiListItemText-root': {
-        '&.MuiListItemText-inset': {
-          paddingLeft: '47px',
+        '&-inset': {
+          '&.sidebar__text': {
+            paddingLeft: '47px',
+          }
         },
         '&.sidebar__title': {
-          paddingLeft: '45px',
+          padding: '8px 18px 8px 45px',
         }
       },
       '.MuiButtonBase-root': {
+        '&.toolbar__button': {
+          margin: "0 5px",
+        },
         '&.menu-button': {
           marginRight: theme.spacing(2),
         },
+        '&.start-button': {
+          marginTop: theme.spacing(10),
+          color: "inherit",
+        },
       },
-      '.MuiSvgIcon-colorError': {
-        cursor: 'pointer',
-      },
-      'sidebar__wrapper': {
-        height: '100%'
-      },
-      '.sidebar--open': {
-        display: 'flex',
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        maxWidth: '240px',
-        color: theme.palette.primary.contrastText,
-        borderRight: '1px solid rgba(0, 0, 0, 0.12)',
-        backgroundColor: theme.palette.background.paper,
-        flexDirection: 'column',
-      },
-      '.sidebar--closed': {
-        display: 'none',
-      },
-      '.aa-Form': {
+      '.aa-Form, .aa-DetachedSearchButton': {
         position: 'relative',
+        width: '100%',
+        marginLeft: 0,
+        border: 0,
         borderRadius: theme.shape.borderRadius,
         backgroundColor: alpha(theme.palette.common.white, 0.15),
         '&:hover': {
           backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
-        width: '100%',
-        marginLeft: 0,
         [theme.breakpoints.up('sm')]: {
           width: 'auto',
-          marginLeft: theme.spacing(3),
+          marginLeft: theme.spacing(4),
         },
-        border: 0,
         "&:focus-within": {
-        boxShadow: "none"
+          boxShadow: "none"
         },
       },
       '.aa-InputWrapperPrefix': {
@@ -114,7 +132,7 @@ theme.overrides = {
       '.aa-InputWrapper': {
         paddingLeft: "15px"
       },
-      '.aa-Input': {
+      '.aa-Input, .aa-DetachedSearchButtonPlaceholder': {
         width: '100%',
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -126,6 +144,12 @@ theme.overrides = {
             width: '26ch',
           },
         },
+      },
+      '.aa-DetachedSearchButtonPlaceholder': {
+        width: '20ch'
+      },
+      '.aa-DetachedFormContainer .aa-Input': {
+        color: theme.palette.primary.contrastText,
       },
       '.aa-ClearButton': {
         color: theme.palette.secondary.contrastText,
@@ -144,6 +168,14 @@ theme.overrides = {
         [theme.breakpoints.up('md')]: {
           display: 'block',
         },
+      },
+      '.main': {
+        marginTop: theme.spacing(8),
+        marginBottom: theme.spacing(8),
+        textAlign: 'center',
+      },
+      '.feat-card__media': {
+        height: 140,
       },
     }
   }

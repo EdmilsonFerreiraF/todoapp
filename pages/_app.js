@@ -9,6 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import MainAppBar from '../src/components/MainAppBar/MainAppBar';
 import LoggedContext from '../src/context/LoggedContext'
 import theme from '../src/constants/theme';
+import { Container } from '@material-ui/core';
 
 const cache = createCache({ key: 'css' });
 cache.compat = true;
@@ -23,21 +24,21 @@ export default function MyApp(props) {
   }
 
   const [logged, setLogged] = React.useState(token ? true : false)
-
   const loggedContext = {logged, setLogged}
 
   return (
     <CacheProvider value={cache}>
       <Head>
-        <title>My page</title>
+        <title>Todoapp</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
       <LoggedContext.Provider value={loggedContext}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <MainAppBar />
-        <Component {...pageProps} />
+        <Container className="main">
+          <Component {...pageProps}/>
+        </Container>
       </LoggedContext.Provider>
       </ThemeProvider>
     </CacheProvider>

@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 import Search from './Search/Search';
 
 const searchClient = algoliasearch(
-  'latency',
-  '6be0576ff61c053d5f9a3225e2a90f76'
+  '4XK9MRMZUZ',
+  '2cbb64e05103f11cad513d9cda693b43'
 );
 
-const indexName = searchClient.initIndex('your_index_name');
+const indexName = searchClient.initIndex('dev_fullstack');
 
 const DEFAULT_PROPS = {
   searchClient,
