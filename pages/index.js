@@ -1,9 +1,19 @@
+import { useRouter } from 'next/router';
 import { CardMedia, CardContent, CardActionArea, Card, Button, Grid, Container, Typography } from '@material-ui/core';
 import { OfflinePin as OfflinePinIcon, Share as ShareIcon, PlaylistAddCheck as PlaylistAddCheckIcon } from '@material-ui/icons';
 
 import { goToSignUp } from '../src/routes/coordinator';
+import { useUnprotectPage } from '../src/hooks/useUnprotectPage';
 
 export default function Index() {
+  useUnprotectPage();
+  
+  const router = useRouter();
+
+  const handleStartButton = () => {
+    goToSignUp(router);
+  }
+
   return (
     <Container maxWidth="md" className="presentation">
       <Typography
@@ -79,7 +89,9 @@ export default function Index() {
         </Grid>
       </Grid>
 
-      <Button onClick={goToSignUp} className="start-button" variant="contained" color="secondary" size="large">
+      <Button
+        onClick={handleStartButton}
+        className="start-button" variant="contained" color="secondary" size="large">
         Start
       </Button>
     </Container>

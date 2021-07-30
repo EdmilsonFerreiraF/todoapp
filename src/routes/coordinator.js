@@ -9,3 +9,7 @@ export const goToLogin = (router) => {
 export const goToSignUp = (router) => {
     router.push('/signup')
 }
+  
+export const goToTasks = (router) => {
+    router.push('/tasks')
+}

@@ -9,30 +9,30 @@ import '@algolia/autocomplete-theme-classic';
 
 function Search(props) {
   return (
-      <Autocomplete
-        openOnFocus={true}
-        getSources={({ query }) => [
-          {
-            sourceId: 'products',
-            getItems() {
-              return getAlgoliaResults({
-                searchClient: props.searchClient,
-                queries: [
-                  {
-                    indexName: 'dev_fullstack',
-                    query,
-                  },
-                ],
-              });
-            },
-            templates: {
-              item({ item, components }) {
-                return <ProductItem hit={item} components={components} />;
-              },
+    <Autocomplete
+      openOnFocus={true}
+      getSources={({ query }) => [
+        {
+          sourceId: 'products',
+          getItems() {
+            return getAlgoliaResults({
+              searchClient: props.searchClient,
+              queries: [
+                {
+                  indexName: 'dev_fullstack',
+                  query,
+                },
+              ],
+            });
+          },
+          templates: {
+            item({ item, components }) {
+              return <ProductItem hit={item} components={components} />;
             },
           },
-        ]}
-      />
+        },
+      ]}
+    />
   );
 }
 

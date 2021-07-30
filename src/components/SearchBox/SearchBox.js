@@ -19,14 +19,14 @@ const DEFAULT_PROPS = {
 
 const SearchBox = () => {
   // const fetcher = url => useRequestData(url, []);
-  
+
   // const { data, error } = useSWR('/api/user', fetcher)
-  
+
   // indexName.saveObjects(data, { autoGenerateObjectIDIfNotExist: true });
-  
+
   // if (error) { return <div>failed to load</div>}
   // if (!data) { return <div>loading...</div> }
-  
+
   return (
     <div>
       <Search

@@ -80,26 +80,29 @@ theme.overrides = {
       '.MuiListItemIcon': {
         minWidth: '45px',
       },
-      '.MuiListItemText-root': {
+      '.MuiListItemText': {
         '&-inset': {
           '&.sidebar__text': {
-            paddingLeft: '47px',
+            paddingLeft: '45px',
           }
         },
-        '&.sidebar__title': {
+        '&-root.sidebar__title': {
           padding: '8px 18px 8px 45px',
         }
       },
       '.MuiButtonBase-root': {
-        '&.toolbar__button': {
-          margin: "0 5px",
-        },
+        // '&.toolbar__button': {
+        //   margin: "0 5px",
+        // },
         '&.menu-button': {
           marginRight: theme.spacing(2),
         },
         '&.start-button': {
           marginTop: theme.spacing(10),
           color: "inherit",
+        },
+        '&.submit': {
+          margin: theme.spacing(3, 0, 2),
         },
       },
       '.aa-Form, .aa-DetachedSearchButton': {
@@ -177,6 +180,22 @@ theme.overrides = {
       '.feat-card__media': {
         height: 140,
       },
+      '.paper': {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      },
+      '.form': {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(3),
+      },
+      '.MuiAvatar-root': {
+        '&.avatar': {
+          margin: theme.spacing(1),
+          backgroundColor: theme.palette.secondary.main,
+        },
+      }
     }
   }
 }

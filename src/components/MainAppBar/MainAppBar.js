@@ -44,19 +44,19 @@ const MainAppBar = () => {
     setProfileAnchor(event.currentTarget);
   };
 
-  const handleSignUp = () => {
+  const handleSignupButton = () => {
     handleMobileMenuClose();
 
     goToSignUp(router)
   }
 
-  const handleLogin = () => {
+  const handleLoginButton = () => {
     handleMobileMenuClose();
 
     goToLogin(router)
   }
 
-  const handleLogout = () => {
+  const handleLogoutButton = () => {
     handleMobileMenuClose();
 
     localStorage.removeItem("token")
@@ -138,7 +138,7 @@ const MainAppBar = () => {
                       )
                       :
                       <ListItemText
-                      className="sidebar__text"
+                        className="sidebar__text"
                         inset primary={text}
                       />
                     }
@@ -189,13 +189,13 @@ const MainAppBar = () => {
                     <AccountCircle />
                   </IconButton>
 
-                  <Button color="inherit">Logout</Button>
+                  <Button onClick={handleLogoutButton} color="inherit">Logout</Button>
                 </div>
               )
               : (
                 <div>
-                  <Button color="inherit" className="toolbar__button">Signup</Button>
-                  <Button color="inherit" className="toolbar__button">Login</Button>
+                  <Button color="inherit" className="toolbar__button" onClick={handleSignupButton}>Signup</Button>
+                  <Button color="inherit" className="toolbar__button" onClick={handleLoginButton}>Login</Button>
                 </div>
               )
             }
@@ -239,14 +239,14 @@ const MainAppBar = () => {
                 <div>
                   <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
                   <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogoutButton}>Logout</MenuItem>
                 </div>
               )
               :
               (
                 <div>
-                  <MenuItem onClick={handleSignUp}>Sign up</MenuItem>
-                  <MenuItem onClick={handleLogin}>Login</MenuItem>
+                  <MenuItem onClick={handleSignupButton}>Sign up</MenuItem>
+                  <MenuItem onClick={handleLoginButton}>Login</MenuItem>
                 </div>
               )
             }
