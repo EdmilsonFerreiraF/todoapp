@@ -1,13 +1,35 @@
 import { useRouter } from 'next/router';
 import { CardMedia, CardContent, CardActionArea, Card, Button, Grid, Container, Typography } from '@material-ui/core';
 import { OfflinePin as OfflinePinIcon, Share as ShareIcon, PlaylistAddCheck as PlaylistAddCheckIcon } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { goToSignUp } from '../src/routes/coordinator';
 import { useUnprotectPage } from '../src/hooks/useUnprotectPage';
 
+const useStyles = makeStyles((theme) => ({
+  logoLarge: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(8),
+  },
+  featCardMedia: {
+    height: 140,
+  },
+  featCardIcon: {
+    width: "100%",
+    height: "100%",
+    marginTop: "10px",
+    color: theme.palette.secondary.main,
+  },
+  startButton: {
+    marginTop: theme.spacing(10),
+    color: "inherit",
+  },
+}));
+
 export default function Index() {
   useUnprotectPage();
-  
+
+  const classes = useStyles();
   const router = useRouter();
 
   const handleStartButton = () => {
@@ -15,9 +37,9 @@ export default function Index() {
   }
 
   return (
-    <Container maxWidth="md" className="presentation">
+    <Container maxWidth="md">
       <Typography
-        className="logo--large"
+        className={classes.logoLarge}
         variant="h2"
         color="inherit"
         noWrap
@@ -26,13 +48,13 @@ export default function Index() {
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={9} sm={5} md={4}>
-          <Card className="feat-card">
+          <Card  >
             <CardActionArea>
               <CardMedia
-                className="feat-card__media"
+                className={classes.featCardMedia}
                 title="Tasks"
               >
-                <PlaylistAddCheckIcon className="feat-card__icon" />
+                <PlaylistAddCheckIcon className={classes.featCardIcon} />
               </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -47,13 +69,13 @@ export default function Index() {
         </Grid>
 
         <Grid item xs={9} sm={5} md={4}>
-          <Card className="feat-card">
+          <Card  >
             <CardActionArea>
               <CardMedia
-                className="feat-card__media"
+                className={classes.featCardMedia}
                 title="Use offline"
               >
-                <OfflinePinIcon className="feat-card__icon" />
+                <OfflinePinIcon className={classes.featCardIcon} />
               </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -68,13 +90,13 @@ export default function Index() {
         </Grid>
 
         <Grid item xs={9} sm={5} md={4}>
-          <Card className="feat-card">
+          <Card  >
             <CardActionArea>
               <CardMedia
-                className="feat-card__media"
+                className={classes.featCardMedia}
                 title="Share tasks"
               >
-                <ShareIcon className="feat-card__icon" />
+                <ShareIcon className={classes.featCardIcon} />
               </CardMedia>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -91,7 +113,7 @@ export default function Index() {
 
       <Button
         onClick={handleStartButton}
-        className="start-button" variant="contained" color="secondary" size="large">
+        className={classes.startButton} variant="contained" color="secondary" size="large">
         Start
       </Button>
     </Container>

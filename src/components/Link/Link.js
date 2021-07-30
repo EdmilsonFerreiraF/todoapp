@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
+import { forwardRef } from 'react';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
+
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+
 import MuiLink from '@material-ui/core/Link';
 
-export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props, ref) {
+export const NextLinkComposed = forwardRef(function NextLinkComposed(props, ref) {
   const { to, linkAs, href, replace, scroll, passHref, shallow, prefetch, locale, ...other } =
     props;
 
@@ -40,7 +42,7 @@ NextLinkComposed.propTypes = {
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-const Link = React.forwardRef(function Link(props, ref) {
+const Link = forwardRef(function Link(props, ref) {
   const {
     activeClassName = 'active',
     as: linkAs,

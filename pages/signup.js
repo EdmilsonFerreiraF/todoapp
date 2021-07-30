@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 
-import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container} from '@material-ui/core';
-import { LockOutlined as LockOutlinedIcon }  from '@material-ui/icons';
+import { Avatar, Button, TextField, Link, Grid, Box, Typography, Container } from '@material-ui/core';
+import { LockOutlined as LockOutlinedIcon } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { signup } from "../src/services/user"
 import { useForm } from "../src/hooks/useForm"
@@ -22,11 +23,32 @@ function Copyright() {
   );
 }
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: 'flex',
+    marginTop: theme.spacing(8),
+    alignItems: 'center',
+    flexDirection: 'column',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
 export default function SignUp() {
   useUnprotectPage()
 
   const router = useRouter();
   const loggedContext = useContext(LoggedContext)
+  const classes = useStyles();
 
   const { form, onChange } = useForm({ firstName: "", lastName: "", username: "", email: "", password: "" })
 
@@ -44,16 +66,14 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className="paper">
-        <Avatar className="avatar">
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h4">
           Sign up
         </Typography>
-        <form className="form"
-          // noValidate
+        <form className={classes.form}
           onSubmit={handleSubmission}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
@@ -129,13 +149,13 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             color="primary"
-            className="submit"
+            className={classes.submit}
           >
             Sign Up
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

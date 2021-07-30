@@ -1,5 +1,5 @@
-import * as React from "react";
+import { createContext } from "react";
 
-const LoggedContext = React.createContext(null);
+const LoggedContext = createContext(null);
 
 export default LoggedContext;

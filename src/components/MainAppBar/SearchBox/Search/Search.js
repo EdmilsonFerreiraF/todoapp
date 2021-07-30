@@ -1,6 +1,7 @@
 import React from 'react';
-import { getAlgoliaResults } from '@algolia/autocomplete-js';
 import PropTypes from 'prop-types';
+
+import { getAlgoliaResults } from '@algolia/autocomplete-js';
 
 import { Autocomplete } from './Autocomplete/Autocomplete';
 import { ProductItem } from './ProductItem/ProductItem';
